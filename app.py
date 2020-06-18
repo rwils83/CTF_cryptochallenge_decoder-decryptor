@@ -3,7 +3,6 @@ import argparse
 import codecs
 
 
-
 def base64_Encode(test=None):
     if test == None:
         cleartext = raw_input("Enter the string to encode \n")
@@ -29,6 +28,7 @@ def base32_Encode(test=None):
     else:
         cleartext = test
     return b.b32encode(cleartext)
+
 
 def base32_Decode(test=None):
     if test == None:
@@ -68,6 +68,8 @@ def parse_args():
     parser.add_argument("-s", "--string", action="store", help="String to encrypt/decrypt")
     args = parser.parse_args()
     return args
+
+
 if __name__ == "__main__":
 
     args = parse_args()
@@ -84,6 +86,4 @@ if __name__ == "__main__":
         print rot_13_decrypt(args.string)
     if args.r13 and args.encrypt:
         print rot_13_encrypt(args.string)
-
-
 
