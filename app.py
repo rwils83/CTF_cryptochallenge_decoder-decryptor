@@ -62,9 +62,9 @@ def parse_args():
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument("-d", "--decrypt", action="store_true", help = "Decode/Decrypt")
     parser.add_argument("-e", "--encrypt", action="store_true", help = "Encode/Encrypt")
-    parser.add_argument("-b64", "--b64", action="store_true", help="Use for base64 with -d or -e")
-    parser.add_argument("-b32", "--b32", action="store_true", help="Use for base32 with -d or -e")
-    parser.add_argument("-r13", "--r13", action="store_true", help="Use for Rot13 with -d or -e")
+    parser.add_argument("-b64", "--base64", action="store_true", help="Use for base64 with -d or -e")
+    parser.add_argument("-b32", "--base32", action="store_true", help="Use for base32 with -d or -e")
+    parser.add_argument("-r13", "--rot13", action="store_true", help="Use for Rot13 with -d or -e")
     parser.add_argument("-s", "--string", action="store", help="String to encrypt/decrypt")
     args = parser.parse_args()
     return args
@@ -74,16 +74,16 @@ if __name__ == "__main__":
 
     args = parse_args()
 
-    if args.b64 and args.decrypt:
+    if args.base64 and args.decrypt:
         print base64_Decode(args.string)
-    if args.b64 and args.encrypt:
+    if args.base64 and args.encrypt:
         print base64_Encode(args.string)
-    if args.b32 and args.decrypt:
+    if args.base32 and args.decrypt:
         print base32_Decode(args.string)
-    if args.b32 and args.encrypt:
+    if args.base32 and args.encrypt:
         print base32_Encode(args.string)
-    if args.r13 and args.decrypt:
+    if args.rot13 and args.decrypt:
         print rot_13_decrypt(args.string)
-    if args.r13 and args.encrypt:
+    if args.rot13 and args.encrypt:
         print rot_13_encrypt(args.string)
 
