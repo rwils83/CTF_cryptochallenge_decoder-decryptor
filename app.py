@@ -1,9 +1,9 @@
-import base64 as b
 import argparse
+import base64 as b
 import codecs
-import string
-import pdb
 import hashlib
+import pdb
+import string
 
 
 def check(cipher_string, char):
