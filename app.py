@@ -3,6 +3,7 @@ import argparse
 import codecs
 import string
 import pdb
+import hashlib
 def check(cipher_string, char):
         #pdb.set_trace()
         if(char.upper() in cipher_string):
@@ -77,6 +78,19 @@ def rot_13_decrypt(test=None):
     return codecs.decode(cleartext, "rot_13")
 
 
+def md5_dict_attack(string_for_testing, test_file):
+    #pdb.set_trace()
+    with open(test_file, "r") as f:
+        for line in f.readlines():
+            m = hashlib.md5(line.strip().encode())
+            if m.hexdigest() == string_for_testing:
+                print(f"""
+[+] Found Matching md5 hash. It is likely your password is {line}
+""")
+            else:
+                pass
+
+
 def parse_args():
     description = "Encode, Decode, Encrypt, Decrypt basic CTF challenges"
     parser = argparse.ArgumentParser(description=description)
@@ -87,6 +101,8 @@ def parse_args():
     parser.add_argument("-r13", "--rot13", action="store_true", help="Use for Rot13 with -d or -e")
     parser.add_argument("-s", "--string", action="store", help="String to encrypt/decrypt")
     parser.add_argument("-vi", "--vigenere", action="store_true", help="Decrypt vigenere cipher text")
+    parser.add_argument("-m", "--md5", action="store_true", help="Performs very simple md5 dictionary attack. Use -P for wordlist")
+    parser.add_argument("-P", "--pass_list", action="store", help="Enter a password file")
     args = parser.parse_args()
     return args
 
@@ -109,4 +125,6 @@ if __name__ == "__main__":
         print(rot_13_encrypt(args.string))
     if args.vigenere:
        print(vigenere_decrypt(args.string))
+    if args.md5:
+        md5_dict_attack(args.string, args.pass_list)
 
