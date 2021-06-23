@@ -1,6 +1,26 @@
 import base64 as b
 import argparse
 import codecs
+import string
+import pdb
+def check(cipher_string, char):
+        #pdb.set_trace()
+        if(char.upper() in cipher_string):
+            pass
+        else:
+            print(f'[+] {char.upper()} not found in Encrypted String. Removing from used Alphabet')
+            return char.upper()
+
+def vigenere_decrypt(encrypted_string):
+    alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    for character in alphabets:
+        if check(encrypted_string, character) is None:
+            pass
+        else:
+           alphabets = alphabets.replace(character, "")
+    return f"""
+[+] Goto https://www.dcode.fr/vigenere-cipher and enter {alphabets} as your alphabet. Then click Automatic Decrypt.
+[+] If you know the Cipher Key, enter in Knowing the Key text box under Decryption method and click decrypt instead.""" 
 
 
 def base64_Encode(test=None):
@@ -66,6 +86,7 @@ def parse_args():
     parser.add_argument("-b32", "--base32", action="store_true", help="Use for base32 with -d or -e")
     parser.add_argument("-r13", "--rot13", action="store_true", help="Use for Rot13 with -d or -e")
     parser.add_argument("-s", "--string", action="store", help="String to encrypt/decrypt")
+    parser.add_argument("-vi", "--vigenere", action="store_true", help="Decrypt vigenere cipher text")
     args = parser.parse_args()
     return args
 
@@ -75,15 +96,17 @@ if __name__ == "__main__":
     args = parse_args()
 
     if args.base64 and args.decrypt:
-        print base64_Decode(args.string)
+        print(base64_Decode(args.string))
     if args.base64 and args.encrypt:
-        print base64_Encode(args.string)
+        print(base64_Encode(args.string))
     if args.base32 and args.decrypt:
-        print base32_Decode(args.string)
+        print(base32_Decode(args.string))
     if args.base32 and args.encrypt:
-        print base32_Encode(args.string)
+        print(base32_Encode(args.string))
     if args.rot13 and args.decrypt:
-        print rot_13_decrypt(args.string)
+        print(rot_13_decrypt(args.string))
     if args.rot13 and args.encrypt:
-        print rot_13_encrypt(args.string)
+        print(rot_13_encrypt(args.string))
+    if args.vigenere:
+       print(vigenere_decrypt(args.string))
 
