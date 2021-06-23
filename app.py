@@ -8,11 +8,12 @@ import hashlib
 
 def check(cipher_string, char):
     # pdb.set_trace()
-    if(char.upper() in cipher_string):
+    if char.upper() in cipher_string:
         pass
     else:
         print(
-            f'[+] {char.upper()} not found in Encrypted String. Removing from used Alphabet')
+            f"[+] {char.upper()} not found in Encrypted String. Removing from used Alphabet"
+        )
         return char.upper()
 
 
@@ -88,9 +89,11 @@ def md5_dict_attack(string_for_testing, test_file):
         for line in f.readlines():
             m = hashlib.md5(line.strip().encode())
             if m.hexdigest() == string_for_testing:
-                print(f"""
+                print(
+                    f"""
 [+] Found Matching md5 hash. It is likely your password is {line}
-""")
+"""
+                )
             else:
                 pass
 
@@ -98,24 +101,32 @@ def md5_dict_attack(string_for_testing, test_file):
 def parse_args():
     description = "Encode, Decode, Encrypt, Decrypt basic CTF challenges"
     parser = argparse.ArgumentParser(description=description)
-    parser.add_argument("-d", "--decrypt",
-                        action="store_true", help="Decode/Decrypt")
-    parser.add_argument("-e", "--encrypt",
-                        action="store_true", help="Encode/Encrypt")
-    parser.add_argument("-b64", "--base64", action="store_true",
-                        help="Use for base64 with -d or -e")
-    parser.add_argument("-b32", "--base32", action="store_true",
-                        help="Use for base32 with -d or -e")
-    parser.add_argument("-r13", "--rot13", action="store_true",
-                        help="Use for Rot13 with -d or -e")
-    parser.add_argument("-s", "--string", action="store",
-                        help="String to encrypt/decrypt")
-    parser.add_argument("-vi", "--vigenere", action="store_true",
-                        help="Decrypt vigenere cipher text")
-    parser.add_argument("-m", "--md5", action="store_true",
-                        help="Performs very simple md5 dictionary attack. Use -P for wordlist")
-    parser.add_argument("-P", "--pass_list", action="store",
-                        help="Enter a password file")
+    parser.add_argument("-d", "--decrypt", action="store_true", help="Decode/Decrypt")
+    parser.add_argument("-e", "--encrypt", action="store_true", help="Encode/Encrypt")
+    parser.add_argument(
+        "-b64", "--base64", action="store_true", help="Use for base64 with -d or -e"
+    )
+    parser.add_argument(
+        "-b32", "--base32", action="store_true", help="Use for base32 with -d or -e"
+    )
+    parser.add_argument(
+        "-r13", "--rot13", action="store_true", help="Use for Rot13 with -d or -e"
+    )
+    parser.add_argument(
+        "-s", "--string", action="store", help="String to encrypt/decrypt"
+    )
+    parser.add_argument(
+        "-vi", "--vigenere", action="store_true", help="Decrypt vigenere cipher text"
+    )
+    parser.add_argument(
+        "-m",
+        "--md5",
+        action="store_true",
+        help="Performs very simple md5 dictionary attack. Use -P for wordlist",
+    )
+    parser.add_argument(
+        "-P", "--pass_list", action="store", help="Enter a password file"
+    )
     args = parser.parse_args()
     return args
 
