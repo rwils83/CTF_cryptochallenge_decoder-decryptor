@@ -6,7 +6,7 @@ import pdb
 import hashlib
 def check(cipher_string, char):
         #pdb.set_trace()
-        if(char.upper() in cipher_string):
+        if(char.upper() in cipher_string.upper()):
             pass
         else:
             print(f'[+] {char.upper()} not found in Encrypted String. Removing from used Alphabet')
@@ -29,7 +29,7 @@ def base64_Encode(test=None):
         cleartext = raw_input("Enter the string to encode \n")
     else:
         cleartext = test
-    return b.b64encode(cleartext)
+    return b.b64encode(cleartext.encode()).decode()
 
 
 def base64_Decode(test=None):
@@ -38,7 +38,7 @@ def base64_Decode(test=None):
     else:
         encoded_text = test
     try:
-        return b.b64decode(encoded_text)
+        return b.b64decode(encoded_text).decode()
     except:
         return "Please enter a base64 encoded string"
 
@@ -48,7 +48,7 @@ def base32_Encode(test=None):
         cleartext = raw_input("Enter the string to encode \n")
     else:
         cleartext = test
-    return b.b32encode(cleartext)
+    return b.b32encode(cleartext.encode()).decode()
 
 
 def base32_Decode(test=None):
@@ -57,7 +57,7 @@ def base32_Decode(test=None):
     else:
         encodedtext = test
     try:
-        return b.b32decode(encodedtext)
+        return b.b32decode(encodedtext).decode()
     except:
         return "Please enter a base32 encoded string"
 
